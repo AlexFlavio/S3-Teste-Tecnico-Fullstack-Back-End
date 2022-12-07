@@ -17,19 +17,29 @@ export class User {
 
   @Column()
   name: string;
+
   @Column({ unique: true })
   email: string;
-  @Column()
-  isAdm: boolean;
-  @Column({ default: true })
-  isActive: boolean;
+
+  @Column("text", { array: true })
+  telefones: string[];
+
   @Column()
   @Exclude()
   password: string;
+
+  @Column({ default: true })
+  isActive: boolean;
+
+  @Column({ default: false })
+  isAdmin: boolean;
+
   @CreateDateColumn()
   createdAt: Date;
+
   @UpdateDateColumn()
   updatedAt: Date;
-  @OneToMany(() => Contacts, (contacts) => contacts.user)
+
+  @OneToMany(() => Contacts, (contacts) => contacts.user, { eager: true })
   contacts: Contacts[];
 }

@@ -1,7 +1,9 @@
 import * as yup from "yup";
 import { hashSync } from "bcryptjs";
+import { SchemaOf } from "yup";
+import { IUserCreateRequest, IUserUpdateRequest } from "../../interfaces/user";
 
-export const userSchema = yup.object().shape({
+export const userSchema: SchemaOf<IUserCreateRequest> = yup.object().shape({
   email: yup.string().required().email(),
   password: yup
     .string()
@@ -11,7 +13,7 @@ export const userSchema = yup.object().shape({
   telefones: yup.array().required(),
 });
 
-export const userUpdateSchema = yup.object().shape({
+export const userUpdateSchema: SchemaOf<IUserUpdateRequest> = yup.object().shape({
   email: yup.string().email(),
   password: yup
     .string()

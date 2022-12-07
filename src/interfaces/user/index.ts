@@ -1,4 +1,6 @@
 import { Icontacts } from "../contacts"
+
+
 export interface IUserCreateRequest {
     name: string
     email: string
@@ -15,5 +17,14 @@ export interface IUserCreateResponse {
     telefones: string[]
     contacts: Icontacts[]
 }
+
+
+export interface IUserUpdateRequest {
+    name?: string
+    email?: string
+    password?: string
+    telefones?: string[]
+}
+
 
 

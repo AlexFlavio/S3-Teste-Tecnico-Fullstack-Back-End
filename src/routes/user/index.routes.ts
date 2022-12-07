@@ -1,4 +1,5 @@
 import { Router } from "express";
+import autoDeleteUserController from "../../controllers/user/autoDeleteUser.controller";
 import createUserController from "../../controllers/user/createUser.controller";
 import updateUserController from "../../controllers/user/updateUser.controller";
 import { validateSchemaMiddleware } from "../../middlewares/schemaValidator.middleware";
@@ -8,11 +9,13 @@ import { userSchema, userUpdateSchema } from "../../schemas/user/index.schemas";
 const userRoutes = Router();
 
 userRoutes.post("", validateSchemaMiddleware(userSchema), createUserController);
+
 userRoutes.patch(
   "",
   tokenVerifyMiddleware,
   validateSchemaMiddleware(userUpdateSchema),
   updateUserController
 );
+userRoutes.delete("", tokenVerifyMiddleware, autoDeleteUserController);
 
 export { userRoutes };

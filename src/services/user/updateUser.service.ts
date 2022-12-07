@@ -17,6 +17,9 @@ const updateUserService = async (
   if (!findUser) {
     throw new AppError("User not found", 404);
   }
+  if (findUser.isActive === false) {
+    throw new AppError("User is already inactive");
+  }
 
   await userRepository.update(id, {
     email: email ? email : findUser.email,

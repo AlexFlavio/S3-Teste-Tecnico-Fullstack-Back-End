@@ -6,7 +6,7 @@ export class Contacts {
   @PrimaryGeneratedColumn("uuid")
   id: string;
   @Column()
-  nome: string;
+  name: string;
   @Column("text", { array: true })
   emails: string[];
   @Column("text", { array: true })

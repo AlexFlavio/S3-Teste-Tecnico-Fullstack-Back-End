@@ -11,6 +11,6 @@ export class Contacts {
   emails: string[];
   @Column("text", { array: true })
   telefones: string[];
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, { onDelete: "CASCADE" })
   user: User;
 }

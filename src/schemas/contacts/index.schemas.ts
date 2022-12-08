@@ -8,5 +8,8 @@ export const contactsSchema: SchemaOf<Icontacts> = yup.object().shape({
   telefones: yup.array().required(),
 });
 
-//yup.object().shape({ path: yup.string().email() })
-// yup.object().shape({ path: yup.string() })
+export const contactUpdateSchema = yup.object().shape({
+  emails: yup.array(yup.object().shape({ path: yup.string().email() })),
+  name: yup.string(),
+  telefones: yup.array(yup.object().shape({ path: yup.string() })),
+});

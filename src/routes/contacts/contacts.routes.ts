@@ -1,9 +1,13 @@
 import { Router } from "express";
 import createContactController from "../../controllers/contacts/createContacts.controller";
 import deleteContactController from "../../controllers/contacts/deleteContact.controller";
+import updateContactController from "../../controllers/contacts/updateContact.controller";
 import { validateSchemaMiddleware } from "../../middlewares/schemaValidator.middleware";
 import { tokenVerifyMiddleware } from "../../middlewares/tokenVerify.middleware";
-import { contactsSchema } from "../../schemas/contacts/index.schemas";
+import {
+  contactsSchema,
+  contactUpdateSchema,
+} from "../../schemas/contacts/index.schemas";
 
 const contactsRoutes = Router();
 
@@ -14,6 +18,13 @@ contactsRoutes.post(
   createContactController
 );
 
-contactsRoutes.delete("/:id",tokenVerifyMiddleware,deleteContactController)
+contactsRoutes.delete("/:id", tokenVerifyMiddleware, deleteContactController);
+
+contactsRoutes.patch(
+  "/:id",
+  tokenVerifyMiddleware,
+  validateSchemaMiddleware(contactUpdateSchema),
+  updateContactController
+);
 
 export { contactsRoutes };
